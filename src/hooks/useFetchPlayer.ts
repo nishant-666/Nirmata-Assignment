@@ -11,5 +11,5 @@ export default function useFetchPlayer() {
   useEffect(() => {
     getPlayerList();
   }, []);
-  return { playerList };
+  return { playerList, setPlayerList };
 }
