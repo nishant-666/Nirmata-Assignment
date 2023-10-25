@@ -82,16 +82,17 @@ export default function PlayerList() {
                   rank: "";
                   dob: "";
                 }) => (
-                  <div
-                    key={player.id}
-                    className="players"
-                    onClick={() =>
-                      navigate("/player-details", {
-                        state: player,
-                      })
-                    }
-                  >
-                    <h2>{player.name}</h2>
+                  <div key={player.id} className="players">
+                    <h2
+                      onClick={() =>
+                        navigate("/player-details", {
+                          state: player,
+                        })
+                      }
+                      className="player-name"
+                    >
+                      {player.name}
+                    </h2>
                     <p>Type: {player.type?.toUpperCase()}</p>
                     <p>Points: {player.points}</p>
                     <p>Rank: {player.rank}</p>
@@ -108,16 +109,16 @@ export default function PlayerList() {
                 rank: "";
                 dob: "";
               }) => (
-                <div
-                  key={player.id}
-                  className="players"
-                  onClick={() =>
-                    navigate("/player-details", {
-                      state: player,
-                    })
-                  }
-                >
-                  <h2>{player.name}</h2>
+                <div key={player.id} className="players">
+                  <h2
+                    onClick={() =>
+                      navigate("/player-details", {
+                        state: player,
+                      })
+                    }
+                  >
+                    {player.name}
+                  </h2>
                   <p>Type: {player.type?.toUpperCase()}</p>
                   <p>Points: {player.points}</p>
                   <p>Rank: {player.rank}</p>

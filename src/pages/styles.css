@@ -31,13 +31,16 @@
 .playerDetailsComponent {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
   font-family: "Roboto", sans-serif;
+  gap: 20px;
 }
 
 .player-details-card {
   border: 1px solid rgb(62, 62, 62);
   padding: 20px;
-  width: 500px;
+  width: 400px;
 }
 
 .go-back {
@@ -56,4 +59,20 @@
 .back-icon:hover {
   background-color: white;
   color: black;
+}
+
+.similar-players {
+  border: 1px solid rgb(62, 62, 62);
+  padding: 20px;
+  width: 400px;
+}
+
+.divider {
+  border-color: rgb(87, 87, 87);
+  border-style: solid;
+  border-width: 1px;
+}
+
+.player-name {
+  cursor: pointer;
 }
