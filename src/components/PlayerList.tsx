@@ -5,6 +5,7 @@ import CommonInput from "./common/CommonInput";
 import { useEffect, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 import CommonSelect from "./common/CommonSelect";
+import CommonPagination from "./common/Pagination";
 
 export default function PlayerList() {
   const [searchInput, setSearchInput] = useState("");
@@ -16,6 +17,14 @@ export default function PlayerList() {
   let navigate = useNavigate();
   let { playerList, setPlayerList } = useFetchPlayer();
   let { debouncedValue } = useDebounce(searchInput, 1000);
+
+  let limit = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  let lastIndex = currentPage * limit;
+  let firstIndex = lastIndex - limit;
+
+  let currentItems = playerList.slice(firstIndex, lastIndex);
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -57,7 +66,7 @@ export default function PlayerList() {
       />
       <div className="player-list">
         {debouncedValue.length > 0
-          ? playerList
+          ? currentItems
               .filter((item: { name: "" }) =>
                 Object.values(item)
                   .join("")
@@ -90,7 +99,7 @@ export default function PlayerList() {
                   </div>
                 )
               )
-          : playerList.map(
+          : currentItems.map(
               (player: {
                 id: "";
                 name: "";
@@ -117,6 +126,13 @@ export default function PlayerList() {
               )
             )}
       </div>
+
+      <CommonPagination
+        limit={limit}
+        totalPosts={playerList.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
