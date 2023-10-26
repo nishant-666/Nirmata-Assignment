@@ -89,11 +89,15 @@
   cursor: pointer;
   background-color: #212121;
 
-  transform: scale(1.3);
+  transform: scale(1.1);
 
   z-index: 9999;
 }
 
 .player-name:hover {
   color: rgb(255, 255, 255);
+}
+
+.player-description {
+  font-size: 17px;
 }

@@ -5,6 +5,7 @@ function useDebounce(value: string, delay: number) {
 
   useEffect(() => {
     const handler = setTimeout(() => {
+      sessionStorage.setItem("searchQuery", value);
       setDebouncedValue(value);
     }, delay);
 

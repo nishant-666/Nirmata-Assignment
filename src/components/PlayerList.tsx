@@ -9,13 +9,15 @@ import usePaginate from "../hooks/usePaginate";
 import PlayerCard from "./PlayerCard";
 
 export default function PlayerList() {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(
+    sessionStorage.getItem("searchQuery") || ""
+  );
   const [selectedOption, setSelectedOption] = useState("Name");
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
   };
 
-  let { playerList, setPlayerList } = useFetchPlayer();
+  let { playerList, setPlayerList } = useFetchPlayer(searchInput);
 
   let { currentItems, setCurrentPage, limit, currentPage } = usePaginate(
     playerList as []
@@ -38,7 +40,11 @@ export default function PlayerList() {
   return (
     <div className="playerComponent">
       <div className="filter-container">
-        <CommonInput placeholder="Search for a Player" onChange={handleInput} />
+        <CommonInput
+          searchInput={searchInput}
+          placeholder="Search for a Player"
+          onChange={handleInput}
+        />
         <CommonSelect
           selectedOption={selectedOption}
           onChange={handleSelectChange}
@@ -51,12 +57,14 @@ export default function PlayerList() {
         />
       </div>
 
-      <CommonPagination
-        limit={limit}
-        totalPosts={playerList.length}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className="mt-5">
+        <CommonPagination
+          limit={limit}
+          totalPosts={playerList.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 }

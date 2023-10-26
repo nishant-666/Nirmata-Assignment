@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import useFetchPlayer from "../hooks/useFetchPlayer";
 
 export default function PlayerDetails() {
-  let { playerList } = useFetchPlayer();
+  let { playerList } = useFetchPlayer("");
   let location = useLocation();
   let navigate = useNavigate();
   let { name, description, points, type, rank, dob } = location.state;
@@ -25,6 +25,12 @@ export default function PlayerDetails() {
 
   useEffect(() => {
     similarPlayers();
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }, [playerList, name]);
   return (
     <div className="playerDetailsComponent">
@@ -46,70 +52,77 @@ export default function PlayerDetails() {
             <div className="hero-content text-center">
               <div className="max-w-md">
                 <h1 className="text-4xl font-bold player-name">{name}</h1>
+                <div className="flex flex-col w-full">
+                  <div className="divider"></div>
+                </div>
+                <p className="player-description">{description}</p>
+                <div className="flex flex-col w-full">
+                  <div className="divider"></div>
+                </div>
+                <p>Points: {points}</p>
 
-                <p className="py-2 mt-3">{description}</p>
+                <p>Rank: {rank}</p>
 
-                <p className="py-2">Points: {points}</p>
+                {type ? <p>Type: {type}</p> : <></>}
 
-                <p className="py-2">Rank: {rank}</p>
+                <p>{calculateDOB(dob)}</p>
 
-                <p className="py-2">Type: {type?.toUpperCase()}</p>
-
-                <p className="py-2">{calculateDOB(dob)}</p>
-
-                <p className="py-2">Age: {calculateAge(dob)} Years</p>
+                <p>Age: {calculateAge(dob)} Years</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="card">
-        <div className="hero">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <h1 className="text-4xl font-bold player-name">
-                Similar Players
-              </h1>
+      {simmilarPlayers.length > 0 ? (
+        <div className="card">
+          <div className="hero">
+            <div className="hero-content text-center">
+              <div className="max-w-md">
+                <h1 className="text-4xl font-bold player-name">
+                  Similar Players
+                </h1>
 
-              <div className="similar-players mt-5">
-                {simmilarPlayers.map(
-                  (player: {
-                    id: "";
-                    name: "";
-                    type: "";
-                    points: "";
-                    rank: "";
-                    dob: "";
-                  }) => (
-                    <div
-                      key={player.id}
-                      className=""
-                      onClick={() =>
-                        navigate("/player-details", {
-                          state: player,
-                        })
-                      }
-                    >
-                      <h2 className="text-2xl font-bold player-name">
-                        {player.name}
-                      </h2>
-                      <p>Points: {player.points}</p>
-                      <p>Rank: {player.rank}</p>
-                      {simmilarPlayers.length > 1 ? (
-                        <div className="flex flex-col w-full">
-                          <div className="divider"></div>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  )
-                )}
+                <div className="similar-players mt-5">
+                  {simmilarPlayers.map(
+                    (player: {
+                      id: "";
+                      name: "";
+                      type: "";
+                      points: "";
+                      rank: "";
+                      dob: "";
+                    }) => (
+                      <div key={player.id} className="">
+                        <h2
+                          onClick={() =>
+                            navigate("/player-details", {
+                              state: player,
+                            })
+                          }
+                          className="text-2xl font-bold player-name"
+                        >
+                          {player.name}
+                        </h2>
+                        <p>Points: {player.points}</p>
+                        <p>Rank: {player.rank}</p>
+                        {simmilarPlayers.length > 1 ? (
+                          <div className="flex flex-col w-full">
+                            <div className="divider"></div>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -19,7 +19,6 @@ export default function CommonPagination({
       activePage={currentPage}
       itemsCountPerPage={10}
       totalItemsCount={totalPosts}
-      pageRangeDisplayed={totalPosts}
       onChange={handlePageChange}
       activeClass="pagination-active"
       innerClass="pagination-button"
