@@ -13,3 +13,8 @@ interface Pagination {
   totalPosts: number;
   setCurrentPage: Function;
 }
+
+interface PlayerCard {
+  searchInput: string;
+  currentItems: [];
+}

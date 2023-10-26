@@ -3,4 +3,14 @@
   height: 40px;
   padding: 0 10px;
   color: white;
+  margin-bottom: 40px;
+}
+
+.search-input {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  right: 25px;
 }

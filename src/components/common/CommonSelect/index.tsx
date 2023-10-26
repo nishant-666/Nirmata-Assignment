@@ -1,18 +1,18 @@
 import "./index.css";
 
-export default function CommonSelect({
-  selectedOption,
-  onChange,
-}: CommonSelect) {
+export default function CommonSelect({ onChange }: CommonSelect) {
   return (
     <div className="common-select">
-      <label>Select an option: </label>
+      <label className="label">
+        <span className="label-text">Sort By</span>
+      </label>
       <select
-        className="select-option"
-        value={selectedOption}
+        className="select select-bordered w-full max-w-xs"
         onChange={onChange}
       >
-        <option value="">Select an Option</option>
+        <option disabled selected>
+          Select an Option
+        </option>
         <option value="name">Name</option>
         <option value="rank">Rank</option>
         <option value="age">Age</option>
