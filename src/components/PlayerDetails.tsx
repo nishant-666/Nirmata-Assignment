@@ -14,7 +14,8 @@ export default function PlayerDetails() {
   const similarPlayers = () => {
     setSimmilarPlayers(
       playerList.filter(
-        (item: { type: "" }) => item.type === type && name !== item.name
+        (item: { name: ""; type: "" }) =>
+          item.type === type && name !== item.name
       )
     );
   };
