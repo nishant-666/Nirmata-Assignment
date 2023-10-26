@@ -12,13 +12,9 @@ export default function PlayerDetails() {
   let { name, description, points, type, rank, dob } = location.state;
   const [simmilarPlayers, setSimmilarPlayers] = useState([]);
   const similarPlayers = () => {
-    let nameFirstChar = name[0];
-
     setSimmilarPlayers(
       playerList.filter(
-        (item: { name: "" }) =>
-          item.name[0].toLowerCase() === nameFirstChar.toLowerCase() &&
-          name.toLowerCase() !== item.name.toLowerCase()
+        (item: { type: "" }) => item.type === type && name !== item.name
       )
     );
   };
@@ -105,6 +101,7 @@ export default function PlayerDetails() {
                         </h2>
                         <p>Points: {player.points}</p>
                         <p>Rank: {player.rank}</p>
+                        <p>Type: {player.type}</p>
                         {simmilarPlayers.length > 1 ? (
                           <div className="flex flex-col w-full">
                             <div className="divider"></div>
